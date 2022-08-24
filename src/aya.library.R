@@ -62,6 +62,8 @@ read_fusions <- function(working_dir, pattern = "_fusions.tsv$") {
     
   }
   
+  return(fusions.df)
+  
 }
 
 # Create fusion heatmap
