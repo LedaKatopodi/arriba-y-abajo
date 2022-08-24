@@ -25,6 +25,7 @@ aya_palette <- c("#E38A42FF", "#42B3E3FF",
 
 ## Functions ##
 
+# Show aya color palette and perform colorblind test 
 aya_colors <- function() {
   
   print("Arriba y abajo color palette:")
@@ -36,6 +37,7 @@ aya_colors <- function() {
   
 }
 
+# Read Arriba output files
 read_fusions <- function(working_dir, pattern = "_fusions.tsv$") {
   
   fusion_files <- list.files(working_dir, pattern = pattern, 
@@ -62,6 +64,7 @@ read_fusions <- function(working_dir, pattern = "_fusions.tsv$") {
   
 }
 
+# Create fusion heatmap
 fusion_heatmap <- function(data, metadata = NULL, fusion_mode = "fusion", top_features = 50, custom_order_par = NULL) {
   
   ## metadata: data.frame with rownames = Sample IDs, and columns the metadata parameters to be annotated
@@ -107,7 +110,7 @@ fusion_heatmap <- function(data, metadata = NULL, fusion_mode = "fusion", top_fe
     
   } else {
     
-  stop('Error: `fusion_mode` parameter not specfified correctly; choose from: "fusion", "gene"')
+    stop('Error: `fusion_mode` parameter not specfified correctly; choose from: "fusion", "gene"')
     
   }
   
@@ -189,6 +192,7 @@ fusion_heatmap <- function(data, metadata = NULL, fusion_mode = "fusion", top_fe
   }
 }
 
+# Perform fusion statistical tests (Fisher's)
 fusion_stat_tests <- function(data, metadata, metadata_par, fusion_mode = "fusion", top_features = 100, pval = 0.1) {
   
   if (fusion_mode == "fusion") {
@@ -238,7 +242,7 @@ fusion_stat_tests <- function(data, metadata, metadata_par, fusion_mode = "fusio
     dplyr::select(Sample, fusion_mode_par, num) %>%
     tidyr::pivot_wider(names_from = "fusion_mode_par", values_from = "num") %>%
     dplyr::mutate(across(.cols = everything(), ~replace_na(., 0)))
-
+  
   # Attach metadata
   fusions.meta <- left_join(fusions.tbl.piv, metadata, by = "Sample")
   
@@ -254,3 +258,5 @@ fusion_stat_tests <- function(data, metadata, metadata_par, fusion_mode = "fusio
     }
   }
 }
+
+
