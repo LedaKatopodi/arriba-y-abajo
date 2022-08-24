@@ -6,4 +6,4 @@
 
 ## 👟 Walkthrough
 
-A walkthrough will be uploaded soon. Main functions can be found at the [library script](/src/aya.library.R)
+A walkthrough will be uploaded soon. Main functions can be found at the [library script](/src/aya.library.R).
